@@ -1,0 +1,36 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();
+		
+	var menuItems = homePage.Children.Where("UmbracoNaviHide == false");
+	
+	var logo = homePage.Children.Last();
+}
+<!-- Links -->
+<div class="container">
+    <div>
+        <div class="row">
+			
+			<div class="2u">
+			<a href="@homePage.Url" class="image image-full"><img src="@logo.Image" alt="" /></a>
+			</div>
+            @foreach (var link in menuItems)
+            {
+				
+             	<div class="2u">  
+                    <!-- Link -->
+                    <section class="is-link">
+                        <h3><a href="@link.Url">@link.Name</a></h3>
+                    </section>
+                    <!-- /Link -->
+             	 </div>
+            }
+		
+        </div>
+    </div>
+</div>
+<!-- /Links -->

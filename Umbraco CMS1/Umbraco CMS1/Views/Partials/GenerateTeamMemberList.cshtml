@@ -1,0 +1,68 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    var teamMembers = CurrentPage.umbMemberListing; 
+}
+
+
+<!-- Archives -->
+<section class = "is-members">
+	<ul class="contact">
+		<div class="row">
+			@foreach (var newsItem in teamMembers)
+			{
+				
+					// If the editor has not explicitly provided the "Page title" property page 
+					// then just show the name of the page otherwise show the provided title
+					var title = string.IsNullOrWhiteSpace(newsItem.Title) 
+						? newsItem.Name
+						: newsItem.Title;
+			
+					// If the editor has not explicitly set the publishDate property then show the create date
+					var dateTime = newsItem.PublishDate;
+					
+					var designation = newsItem.MemberDesignation;
+					
+					var image = newsItem.MemberPhoto;
+					
+			
+					<div class="4u">	
+					<li>
+						<section class="is-member">
+							@if (string.IsNullOrWhiteSpace(newsItem.MemberPhoto) == false)
+							{
+								<href="@newsItem.Url" class="image image-thumb"><img src="@newsItem.memberphoto" alt="" /></href>
+							}
+							<h3><href="@newsItem.Url">@newsItem.Name</h3> 
+							<h1>@newsItem.memberDesignation<h1>
+							
+							@RenderLinkIfNotEmpty(newsItem.FacebookLink, "facebook", "Facebook")
+							@RenderLinkIfNotEmpty(newsItem.TwitterLink, "twitter", "Twitter")
+							@RenderLinkIfNotEmpty(newsItem.RssLink, "rss", "RSS")
+							@RenderLinkIfNotEmpty(newsItem.DribbbleLink, "dribbble", "Dribbble")
+							@RenderLinkIfNotEmpty(newsItem.LinkedinLink, "linkedin", "Linked In")
+							@RenderLinkIfNotEmpty(newsItem.GoogleLink, "googleplus", "Google+")
+							@RenderLinkIfNotEmpty(newsItem.MailLink, "email", "Email")
+		
+						
+						</section>
+					</li>
+					</div>
+			}
+		</div>
+	</ul>
+	
+			
+</section>
+<!-- /Archives -->
+		
+@helper RenderLinkIfNotEmpty(dynamic link, string cssClass, string linkName)
+{
+    // A helper function is handy when you have to do the same thing over and over again
+    // So now we only have to write the "if" check and list item once, and we only need
+    // to put in the things that can vary
+    
+    if (string.IsNullOrEmpty(link) == false)
+    {
+        <li><a href="@link" class="@cssClass">@linkName</a></li>
+    }
+}

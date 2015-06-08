@@ -1,0 +1,17 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();
+}
+<!-- Features -->
+<section class="is-features">
+    <div>
+        <div class="row">
+                <iframe name="resumator-job-frame" id="resumator-job-frame" class="resumator-advanced-widget" src="//clearmeasure.theresumator.com/apply/jobs/" width="100%" scrolling="no" frameborder="0" allowTransparency="true"></iframe><script>function resizeResumatorIframe(height,nojump){if(nojump== 0){window.scrollTo(0,0);}document.getElementById("resumator-job-frame").height = parseInt(height)+20;}</script>
+        </div>
+    </div>
+</section>
+<!-- /Features -->

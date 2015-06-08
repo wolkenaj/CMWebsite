@@ -1,0 +1,24 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "umbLayout.cshtml";
+}
+@*@{ Html.RenderPartial("umbHomepageBanner"); }*@
+@{Html.RenderPartial("umbBanner");}
+<!-- Main -->
+<div id="main-wrapper">
+	
+    <div id="main" class="container">
+        <div class="row">
+            <div class="12u">
+				@{Html.RenderPartial("umbWhatWeDoBlurbs");}
+                @{ Html.RenderPartial("umbClients"); }
+            </div>
+        </div>
+        <div class="row">
+            <div class="12u">
+                @{   Html.RenderPartial("umbNewsOverviewWidget"); }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Main -->

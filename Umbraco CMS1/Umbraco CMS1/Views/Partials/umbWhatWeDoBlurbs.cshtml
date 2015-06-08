@@ -1,0 +1,33 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();
+		
+	var blurbItems = homePage.Descendants();
+}
+<!-- Blurbs -->
+<section class="is-blurbs">
+	
+    <div>
+        <div class="row">
+            @foreach (var blurb in blurbItems.Where("blurb"))
+            {
+                <div class="3u">
+                    <!-- Blurb -->
+                    <section class="is-blurb">
+						<div class="is-icon">
+                        <a href="/what-we-do/#@blurb.Name" class="image image-full"><img src="@blurb.Image" alt="" /></a>
+						</div>
+                        <h2><a href="/what-we-do/#@blurb.Name">@blurb.Title</a></h2>
+                        <p>@blurb.bodyText</p>
+                    </section>
+                    <!-- /Blurb -->
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- /Blurbs -->
